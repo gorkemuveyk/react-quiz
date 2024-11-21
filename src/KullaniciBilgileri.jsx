@@ -66,7 +66,7 @@ const KullaniciBilgileri = ({ setSorulardami }) => {
         />
         <select
           onChange={(e) => setYas(e.target.value)}
-          className="w-full !border !outline-none !text-gray-600 !border-orange-300 !focus:border-orange-500 !p-3 appearance-none"
+          className="w-full !bg-white !border !outline-none !text-gray-600 !border-orange-300 !focus:border-orange-500 !p-2 appearance-none"
         >
           <option disabled selected>
             Yaşınız
