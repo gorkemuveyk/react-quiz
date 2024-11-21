@@ -65,10 +65,8 @@ const KullaniciBilgileri = ({ setSorulardami }) => {
           value={adsoyad}
         />
         <select
-          onChange={(e) => {
-            setYas(e.target.value);
-          }}
-          className="!border !outline-none !text-gray-600 !border-orange-300 !focus:border-orange-500 !p-2"
+          onChange={(e) => setYas(e.target.value)}
+          className="w-full !border !outline-none !text-gray-600 !border-orange-300 !focus:border-orange-500 !p-3 appearance-none"
         >
           <option disabled selected>
             Yaşınız
@@ -76,6 +74,7 @@ const KullaniciBilgileri = ({ setSorulardami }) => {
           <option value="4-yas">4 Yaş</option>
           <option value="5-yas">5 Yaş</option>
         </select>
+
         <input
           type="text"
           className="border outline-none placeholder:text-gray-600 text-gray-600 border-orange-300 focus:border-orange-500 p-2"
