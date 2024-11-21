@@ -4,7 +4,7 @@ import { useAppContext } from "./context/AppContext";
 import SorularPencere from "./SorularPencere";
 
 function App() {
-  const [sorulardaMi, setSorulardami] = useState(true);
+  const [sorulardaMi, setSorulardami] = useState(false);
   const { values, updateValues } = useAppContext();
 
   return (

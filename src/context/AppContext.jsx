@@ -7,7 +7,7 @@ export const AppProvider = ({ children }) => {
     adsoyad: "",
     yas: "",
     ogretmenAdi: "",
-    tarih: "",
+    dateTime: "",
   });
 
   const updateValues = (newValues) => {

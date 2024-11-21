@@ -48,7 +48,7 @@ const KullaniciBilgileri = ({ setSorulardami }) => {
       alert("Öğretmen adı boş olamaz");
       return;
     }
-    updateValues({ adsoyad, yas, ogretmenAdi, tarih });
+    updateValues({ adsoyad, yas, ogretmenAdi, dateTime });
     setSorulardami(true);
   };
 

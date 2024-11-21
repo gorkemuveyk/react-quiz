@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useAppContext } from "./context/AppContext";
 
 const SorularPencere = () => {
+  const { values, updateValues } = useAppContext();
+
   const kategoriler = [
     {
       kategori: "Kategori 1",
@@ -24,6 +27,80 @@ const SorularPencere = () => {
         { id: 7, soru: "Soru 3.1", cevaplar: ["A", "B", "C", "D"], dogru: "A" },
         { id: 8, soru: "Soru 3.2", cevaplar: ["A", "B", "C", "D"], dogru: "B" },
         { id: 9, soru: "Soru 3.3", cevaplar: ["A", "B", "C", "D"], dogru: "C" },
+        {
+          id: 9,
+          soru: "2Soru 3.3",
+          cevaplar: ["A", "B", "C", "D"],
+          dogru: "C",
+        },
+      ],
+    },
+  ];
+
+  const kategoriler2 = [
+    {
+      kategori: "2Kategori 1",
+      sorular: [
+        {
+          id: 1,
+          soru: "2Soru 1.1",
+          cevaplar: ["A", "B", "C", "D"],
+          dogru: "A",
+        },
+        { id: 2, soru: "Soru 1.2", cevaplar: ["A", "B", "C", "D"], dogru: "B" },
+        { id: 3, soru: "Soru 1.3", cevaplar: ["A", "B", "C", "D"], dogru: "C" },
+      ],
+    },
+    {
+      kategori: "2Kategori 2",
+      sorular: [
+        {
+          id: 4,
+          soru: "2Soru 2.1",
+          cevaplar: ["A", "B", "C", "D"],
+          dogru: "A",
+        },
+        {
+          id: 5,
+          soru: "2Soru 2.2",
+          cevaplar: ["A", "B", "C", "D"],
+          dogru: "B",
+        },
+        {
+          id: 6,
+          soru: "2Soru 2.3",
+          cevaplar: ["A", "B", "C", "D"],
+          dogru: "C",
+        },
+      ],
+    },
+    {
+      kategori: "2Kategori 3",
+      sorular: [
+        {
+          id: 7,
+          soru: "2Soru 3.1",
+          cevaplar: ["A", "B", "C", "D"],
+          dogru: "A",
+        },
+        {
+          id: 8,
+          soru: "2Soru 3.2",
+          cevaplar: ["A", "B", "C", "D"],
+          dogru: "B",
+        },
+        {
+          id: 9,
+          soru: "2Soru 3.3",
+          cevaplar: ["A", "B", "C", "D"],
+          dogru: "C",
+        },
+        {
+          id: 9,
+          soru: "2Soru 3.3",
+          cevaplar: ["A", "B", "C", "D"],
+          dogru: "C",
+        },
       ],
     },
   ];
@@ -40,7 +117,10 @@ const SorularPencere = () => {
 
   const [baslangicZamani, setBaslangicZamani] = useState(Date.now());
 
-  const aktifSorular = kategoriler[aktifKategori].sorular;
+  const aktifSorular =
+    values.yas.slice("-")[0] == 4
+      ? kategoriler[aktifKategori].sorular
+      : kategoriler2[aktifKategori].sorular;
   const aktifSoru = aktifSorular[aktifSoruIndex];
 
   const handleCevapSec = (cevap) => {
@@ -127,7 +207,11 @@ const SorularPencere = () => {
 
             <div className="flex justify-between mt-6">
               <button
-                className="p-2 bg-orange-500 text-white rounded"
+                className={`p-2 bg-orange-500 text-white rounded ${
+                  aktifKategori === 0 && aktifSoruIndex === 0
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : ""
+                }`}
                 onClick={handleGeri}
                 disabled={aktifKategori === 0 && aktifSoruIndex === 0}
               >
@@ -144,7 +228,21 @@ const SorularPencere = () => {
         </>
       ) : (
         <div className="text-center">
-          <h2 className="text-lg font-bold mb-4">Sonuçlar</h2>
+          <h2 className="text-xl font-bold mb-4">Sonuçlar</h2>
+          <div className="text-center mb-4">
+            <p>
+              <strong>Ad Soyad:</strong> {values.adsoyad}
+            </p>
+            <p>
+              <strong>Yaş:</strong> {values.yas.slice("-")[0]}
+            </p>
+            <p>
+              <strong>Öğretmen Adı:</strong> {values.ogretmenAdi}
+            </p>
+            <p>
+              <strong>Tarih:</strong> {values.dateTime}
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {kategoriler.map((kategori) => (
               <div
@@ -187,20 +285,24 @@ const SorularPencere = () => {
               </div>
             ))}
           </div>
-          <div className="mt-4 flex gap-5 w-full justify-around items-start">
-            <p className="text-sm font-bold ">
-              Toplam Süre <br />
-              <span className="text-yellow-600">
+          <div className="mt-4 flex justify-center">
+            <p className="text-sm font-medium text-gray-600">
+              Toplam Süre:{" "}
+              <span className="font-bold text-yellow-600">
                 {toplamSura.toFixed(2)} saniye
               </span>
             </p>
-            <p className="text-sm font-bold">
-              Toplam Doğru <br />
-              <span className="text-green-600">{toplamDogruSayisi}</span>
+            <p className="ml-6 text-sm font-medium text-gray-600">
+              Doğru Cevaplar:{" "}
+              <span className="font-bold text-green-600">
+                {toplamDogruSayisi}
+              </span>
             </p>
-            <p className="text-sm font-bold">
-              Toplam Yanlış <br />
-              <span className="text-red-600">{toplamYanlisSayisi}</span>
+            <p className="ml-6 text-sm font-medium text-gray-600">
+              Yanlış Cevaplar:{" "}
+              <span className="font-bold text-red-600">
+                {toplamYanlisSayisi}
+              </span>
             </p>
           </div>
         </div>
