@@ -138,7 +138,6 @@ const CoktanSecmeliSorular = () => {
       };
     });
   };
-
   const handleIleri = () => {
     if (!cevaplar[aktifSoru.id]) {
       alert("Lütfen bir cevap seçin!");
@@ -204,11 +203,11 @@ const CoktanSecmeliSorular = () => {
                   <button
                     key={index}
                     className={`w-full p-2 text-sm border rounded-lg transition-all duration-300 
-                     ${
-                       isSelected
-                         ? "bg-orange-100 border-orange-500 text-orange-800"
-                         : "bg-gray-100 hover:bg-gray-200"
-                     }`}
+                  ${
+                    isSelected
+                      ? "bg-orange-100 border-orange-500 text-orange-800"
+                      : "bg-gray-100 hover:bg-gray-200"
+                  }`}
                     onClick={() => handleCevapSec(cevap)}
                   >
                     {cevap}
